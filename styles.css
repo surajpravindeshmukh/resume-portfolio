@@ -568,3 +568,135 @@ body {
     break-inside: avoid;
   }
 }
+
+/* Certifications */
+.cert-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.cert-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.8rem;
+}
+
+.cert-item i {
+  width: 18px;
+  font-size: 0.85rem;
+  margin-top: 2px;
+}
+
+.cert-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cert-name {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.cert-meta {
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+.cert-meta.expired {
+  color: #e74c3c;
+  opacity: 0.9;
+}
+
+.cert-meta.ongoing {
+  color: var(--accent);
+  font-weight: 500;
+  opacity: 1;
+}
+
+.cert-item i.fa-clock {
+  color: #e74c3c;
+}
+
+.cert-item i.fa-spinner {
+  color: var(--accent);
+}
+
+.cert-name a {
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.cert-name a:hover {
+  color: var(--secondary);
+  text-decoration: underline;
+}
+
+.cert-meta.valid {
+  color: #27ae60;
+  opacity: 0.9;
+}
+
+.cert-meta.ongoing {
+  color: var(--accent);
+  font-weight: 500;
+  opacity: 1;
+}
+
+.cert-item i.fa-badge-check {
+  color: #27ae60;
+}
+
+.cert-item i.fa-sync-alt {
+  color: var(--accent);
+}
+
+.profile-frame {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+/* Important */
+.profile-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.fallback-pattern {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+  z-index: 0;
+}
+
+.sd-item {
+  position: absolute;
+  color: rgba(255,255,255,0.12);
+  font-weight: 800;
+  font-size: 9px;
+  transform: rotate(-25deg);
+  user-select: none;
+  pointer-events: none;
+}
+
+.fallback-pattern {
+  display: none;
+}
+
+.profile-frame.fallback-active .fallback-pattern {
+  display: block;
+}

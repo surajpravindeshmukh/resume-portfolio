@@ -28,18 +28,36 @@
       <!-- LEFT SECTION: photo, name, contact, skills highlights -->
       <aside class="left-panel">
 
+
         <div class="profile-wrapper">
           <div class="profile-frame">
-            <!-- Professional placeholder image (high-quality portrait style, unsplash professional) -->
-            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&auto=format"
-              alt="Suraj Deshmukh - Team Lead"
-              onerror="this.src='https://ui-avatars.com/api/?background=2c7da0&color=fff&rounded=false&size=200&name=Suraj+D';" />
+
+            <img src="profile.jpg" alt="Suraj Deshmukh - Team Lead"
+              onerror="this.style.display='none'; this.parentElement.classList.add('fallback-active');" />
+
+            <div class="fallback-pattern">
+
+              <span class="sd-item">Angular</span>
+              <span class="sd-item">TypeScript</span>
+              <span class="sd-item">PWA</span>
+              <span class="sd-item">Angular Material</span>
+              <span class="sd-item">JIRA</span>
+              <span class="sd-item">Git</span>
+              <span class="sd-item">.NET</span>
+              <span class="sd-item">Web API</span>
+              <span class="sd-item">MS SQL</span>
+              <span class="sd-item">AWS</span>
+              <span class="sd-item">Azure DevOps</span>
+              <span class="sd-item">CI/CD</span>
+              <span class="sd-item">SCSS</span>
+
+            </div>
           </div>
         </div>
 
         <div class="name">Suraj Deshmukh</div>
         <div style="text-align: center; margin-bottom: 1rem;">
-          <span class="role-tag"><i class="fas fa-code-branch"></i> Team Lead · Software Engineer</span>
+          <span class="role-tag"><i class="fas fa-code-branch"></i> Team Lead | Software Engineer</span>
         </div>
 
         <!-- Contact block -->
@@ -92,23 +110,46 @@
 
         <div class="highlight-item">
           <i class="fas fa-check-circle"></i>
-          <span>Led multiple enterprise-scale Angular migration projects using a phased modernization approach</span>
+          <span>Led major Angular upgrade projects using a step-by-step approach</span>
         </div>
 
         <div class="highlight-item">
           <i class="fas fa-check-circle"></i>
-          <span>Developed secure and scalable fintech solutions with a strong focus on business outcomes</span>
+          <span>Created secure financial applications that deliver real business value</span>
         </div>
 
         <div class="highlight-item">
           <i class="fas fa-check-circle"></i>
-          <span>Mentored developers through code reviews, debugging support, and best engineering practices</span>
+          <span>Guided developers with code reviews, debugging support, and best practices</span>
         </div>
 
         <div class="highlight-item">
           <i class="fas fa-check-circle"></i>
-          <span>Focused on application performance optimization, maintainability, and user experience
-            improvements</span>
+          <span>Made applications faster, cleaner, and easier for users to work with</span>
+        </div>
+
+        <!-- Certifications -->
+        <div class="section-title"><i class="fas fa-certificate"></i> Certifications</div>
+        <div class="cert-list">
+          <div class="cert-item">
+            <i class="fas fa-badge-check"></i>
+            <div class="cert-details">
+              <span class="cert-name">
+                <a href="https://www.credly.com/badges/3c06f94a-fa3f-4fc3-9f5f-c6334b8d1f0c/public_url" target="_blank"
+                  rel="noopener noreferrer">
+                  Microsoft Certified: Azure Fundamentals
+                </a>
+              </span>
+              <span class="cert-meta valid">2019 · No expiry (AZ-900)</span>
+            </div>
+          </div>
+          <div class="cert-item">
+            <i class="fas fa-sync-alt fa-pulse"></i>
+            <div class="cert-details">
+              <span class="cert-name">AWS Certified Solutions Architect - Associate</span>
+              <span class="cert-meta ongoing">In progress</span>
+            </div>
+          </div>
         </div>
 
         <div class="section-title"><i class="fas fa-heart"></i> Interests & Activities</div>
@@ -133,38 +174,40 @@
           </div>
           <div class="hero-subtitle">
             <i class="fas fa-quote-left" style="margin-right: 6px; opacity: 0.6;"></i>
-            of experience in building scalable web applications, modernizing frontend architectures, developing
-            high-performance Angular and .NET solutions, <span class="tooltip">
+            of experience in building web apps that scale, updating frontend systems, creating fast
+            <span class="tooltip">
+              Angular and .NET solutions
+              <span class="tooltip-text">
+                • Built with Angular 21 & .NET Web API<br>
+                • Delivered full-stack enterprise applications<br>
+                • Integrated REST APIs & databases
+              </span>
+            </span>,
+            <span class="tooltip">
               mentoring developers
               <span class="tooltip-text">
-                <!-- <i class="fas fa-users"></i> <strong>Team Leadership & Mentorship</strong><br> -->
-                • Led team of 4-6 developers (varies by project)<br>
-                • Guided step-by-step debugging & issue identification<br>
-                • Conducted regular code reviews & best practices<br>
-                • Facilitated knowledge sharing sessions
+                • Led team of 4-6 developers<br>
+                • Guided step-by-step debugging<br>
+                • Regular code reviews & knowledge sharing
               </span>
             </span>, leading
-            <span class="tooltip" onclick="event.stopPropagation()">
-              technical design initiatives
+            <span class="tooltip">
+              technical design work
               <span class="tooltip-text">
-                <!-- <i class="fas fa-code-branch"></i> Angular Migration Expertise<br> -->
-                • Upgraded projects from Angular 10 → 21<br>
-                • Migrated JHipster monolith to Angular 21 standalone<br>
-                • Modernized multiple enterprise applications<br>
-                • Implemented lazy loading & performance optimization
+                • Upgraded Angular 10 → 21 across projects<br>
+                • Migrated from older frameworks to modern Angular<br>
+                • Made apps faster with lazy loading
               </span>
             </span>
             and
             <span class="tooltip">
-              architecting enterprise-grade systems.
+              building large-scale systems
               <span class="tooltip-text">
-                <!-- <i class="fas fa-cloud-upload-alt"></i> <strong>Enterprise Architecture</strong><br> -->
                 • Designed scalable frontend architecture<br>
-                • Implemented secure fintech solutions with OWASP compliance<br>
-                • Led technical design reviews & architectural decisions<br>
-                • Created reusable component libraries across multiple projects
+                • Built secure fintech solutions<br>
+                • Created reusable components across projects
               </span>
-            </span>
+            </span>.
           </div>
 
           <!-- WORK EXPERIENCE block -->
@@ -280,6 +323,28 @@
 
   <!-- External JavaScript -->
   <script src="script.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      const items = document.querySelectorAll('.sd-item');
+
+      items.forEach(item => {
+
+        const top = Math.random() * 85;
+        const left = Math.random() * 85;
+        const size = 16 + Math.random() * 18;
+        const rotate = -35 + Math.random() * 70;
+
+        item.style.top = `${top}%`;
+        item.style.left = `${left}%`;
+        item.style.fontSize = `${size}px`;
+        item.style.transform = `rotate(${rotate}deg)`;
+
+      });
+
+    });
+  </script>
 </body>
 
 </html>
