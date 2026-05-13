@@ -660,7 +660,7 @@ body {
 .profile-frame {
   position: relative;
   width: 280px;
-  height: 280px;
+  height: 300px;
   overflow: hidden;
   border-radius: 20px;
 }
