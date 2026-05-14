@@ -385,23 +385,54 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+
       const btn = document.getElementById('downloadResumeBtn');
+
       btn.addEventListener('click', async () => {
+
         try {
+
           const element = document.getElementById('resume');
-          await html2pdf(element, {
-            margin: 5,
-            filename: 'Suraj_Deshmukh_Resume.pdf',
-            pagebreak: { mode: ['legacy'] },
-            image: { type: 'jpeg', quality: 1 },
-            html2canvas: { scale: 2, useCORS: true },
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-          });
+
+          await html2pdf()
+            .set({
+              margin: 0,
+
+              filename: 'Suraj_Deshmukh_Resume.pdf',
+
+              pagebreak: {
+                mode: []
+              },
+
+              image: {
+                type: 'jpeg',
+                quality: 1
+              },
+
+              html2canvas: {
+                scale: 2,
+                useCORS: true
+              },
+
+              jsPDF: {
+                unit: 'px',
+                format: [element.offsetWidth, element.offsetHeight],
+                orientation: 'portrait'
+              }
+
+            })
+            .from(element)
+            .save();
+
         } catch (e) {
+
           console.error(e);
           alert('PDF generation failed');
+
         }
+
       });
+
     });
   </script>
 </body>
