@@ -399,7 +399,7 @@ body {
 }
 
 .edu-institute a:hover {
-  color: var(--primary-dark);
+  /* color: var(--primary-dark); */
   text-decoration: underline;
   text-underline-offset: 4px;
 }
