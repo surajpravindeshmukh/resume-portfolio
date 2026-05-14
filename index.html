@@ -31,7 +31,7 @@
 
 
         <div class="profile-wrapper">
-          <div class="profile-frame" style="cursor: pointer;">
+          <div class="profile-frame">
 
             <img src="profile.jpg" alt="Suraj Deshmukh - Team Lead"
               onerror="this.style.display='none'; this.parentElement.classList.add('fallback-active');" />
@@ -380,62 +380,6 @@
 
     });
   </script>
-
-  <script>
-document.addEventListener('DOMContentLoaded', () => {
-
-  const downloadBtn = document.getElementById('downloadResumeBtn');
-
-  if (!downloadBtn) {
-    console.error('Download button not found');
-    return;
-  }
-
-  downloadBtn.addEventListener('click', async () => {
-
-    const element = document.getElementById('resume');
-
-    try {
-
-      downloadBtn.style.cursor = 'wait';
-
-      await html2pdf()
-        .set({
-          margin: 5,
-          filename: 'Suraj_Deshmukh_Resume.pdf',
-          image: {
-            type: 'jpeg',
-            quality: 1
-          },
-          html2canvas: {
-            scale: 2,
-            useCORS: true,
-            scrollY: 0
-          },
-          jsPDF: {
-            unit: 'mm',
-            format: 'a4',
-            orientation: 'portrait'
-          }
-        })
-        .from(element)
-        .save();
-
-    } catch (err) {
-
-      console.error('PDF generation failed:', err);
-      alert('PDF download failed.');
-
-    } finally {
-
-      downloadBtn.style.cursor = 'pointer';
-
-    }
-
-  });
-
-});
-</script>
 </body>
 
 </html>
