@@ -30,7 +30,7 @@
       <aside class="left-panel">
 
 
-        <div class="profile-wrapper" id="downloadResumeBtn">
+        <div class="profile-wrapper">
           <div class="profile-frame" style="cursor: pointer;">
 
             <img src="profile.jpg" alt="Suraj Deshmukh - Team Lead"
@@ -270,11 +270,9 @@
                 <li>Contributed to the development and maintenance of Angular-based enterprise applications, with
                   regular deployments and collaboration with internal teams and external partners for ongoing support.
                 </li>
-                <li>Upgraded SWIFT application from Angular v9 to v11, redesigned the user interface, and resolved
-                  existing
+                <li>Upgraded SWIFT application from Angular v9 to v11, redesigned the user interface, and resolved existing
                   bugs to enhance stability and performance.</li>
-                <li>Worked across the full stack using Angular v6 & v11, .NET Web API (Framework v4.5.2), SQL Server
-                  2016,
+                <li>Worked across the full stack using Angular v6 & v11, .NET Web API (Framework v4.5.2), SQL Server 2016,
                   and MongoDB, ensuring efficient data handling and seamless user experience.</li>
               </ul>
             </div>
@@ -384,68 +382,60 @@
   </script>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
 
-      const btn = document.getElementById('downloadResumeBtn');
+  const downloadBtn = document.getElementById('downloadResumeBtn');
 
-      btn.addEventListener('click', async () => {
+  if (!downloadBtn) {
+    console.error('Download button not found');
+    return;
+  }
 
-        try {
+  downloadBtn.addEventListener('click', async () => {
 
-          const element = document.getElementById('resume');
+    const element = document.getElementById('resume');
 
-          const opt = {
+    try {
 
-            margin: 0,
+      downloadBtn.style.cursor = 'wait';
 
-            filename: 'Suraj_Deshmukh_Resume.pdf',
+      await html2pdf()
+        .set({
+          margin: 5,
+          filename: 'Suraj_Deshmukh_Resume.pdf',
+          image: {
+            type: 'jpeg',
+            quality: 1
+          },
+          html2canvas: {
+            scale: 2,
+            useCORS: true,
+            scrollY: 0
+          },
+          jsPDF: {
+            unit: 'mm',
+            format: 'a4',
+            orientation: 'portrait'
+          }
+        })
+        .from(element)
+        .save();
 
-            pagebreak: {
-              mode: []
-            },
+    } catch (err) {
 
-            image: {
-              type: 'jpeg',
-              quality: 1
-            },
+      console.error('PDF generation failed:', err);
+      alert('PDF download failed.');
 
-            html2canvas: {
-              scale: 2,
-              useCORS: true,
-              scrollY: 0
-            },
+    } finally {
 
-            jsPDF: {
-              unit: 'mm',
-              format: 'a4',
-              orientation: 'portrait'
-            }
+      downloadBtn.style.cursor = 'pointer';
 
-          };
+    }
 
-          const worker = html2pdf().set(opt).from(element);
+  });
 
-          const pdf = await worker.toPdf().get('pdf');
-
-          const pageWidth = 210;
-          const pageHeight = 297;
-
-          pdf.internal.pageSize.width = pageWidth;
-          pdf.internal.pageSize.height = pageHeight;
-
-          await worker.save();
-
-        } catch (e) {
-
-          console.error(e);
-          alert('PDF generation failed');
-
-        }
-
-      });
-
-    });
-  </script>
+});
+</script>
 </body>
 
 </html>

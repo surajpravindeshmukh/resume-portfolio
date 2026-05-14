@@ -765,35 +765,3 @@ body {
     break-inside: avoid;
   }
 }
-
-@media print {
-
-  * {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-
-  .hero-title,
-  .section-title,
-  .block-header,
-  .job-title,
-  .edu-degree {
-    color: #0f172a !important;
-    opacity: 1 !important;
-  }
-
-  i {
-    display: inline-block !important;
-  }
-
-  .hero-section,
-  .content-block,
-  .job-item {
-    break-inside: avoid;
-  }
-
-  .sd-item {
-    transform: none !important;
-  }
-
-}
