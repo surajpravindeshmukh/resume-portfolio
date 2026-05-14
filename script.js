@@ -289,11 +289,11 @@
     const contactItems = document.querySelectorAll('.contact-item');
     contactItems.forEach(item => {
       item.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateX(5px)';
-        this.style.transition = 'transform 0.2s ease';
+        // this.style.transform = 'translateX(5px)';
+        // this.style.transition = 'transform 0.2s ease';
       });
       item.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateX(0)';
+        // this.style.transform = 'translateX(0)';
       });
     });
   }

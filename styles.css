@@ -185,8 +185,9 @@ body {
 }
 
 .contact-item a:hover {
-  color: var(--primary-dark);
+  /* color: var(--primary-dark); */
   text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .skills {
@@ -303,6 +304,17 @@ body {
   margin-top: 4px;
 }
 
+.company a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.company a:hover {
+  color: var(--secondary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 .duration {
   background: #eef2f7;
   padding: 5px 12px;
@@ -389,6 +401,7 @@ body {
 .edu-institute a:hover {
   color: var(--primary-dark);
   text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .edu-year {
@@ -506,7 +519,7 @@ body {
 .cert-details {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .cert-name {
@@ -522,8 +535,9 @@ body {
 }
 
 .cert-name a:hover {
-  color: var(--secondary);
+  /* color: var(--secondary); */
   text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .cert-meta {
