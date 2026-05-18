@@ -596,8 +596,8 @@ body {
   display: inline-block;
   cursor: help;
   border-bottom: 1px dashed var(--accent);
-  padding: 0;
-  border-radius: 6px;
+  /* padding: 0 4px; */
+  /* border-radius: 6px; */
   transition: all 0.2s ease;
 }
 
