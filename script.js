@@ -107,37 +107,41 @@
 
   // Position tooltip to prevent cropping
   function positionTooltip(tooltip) {
-    const tooltipText = tooltip.querySelector('.tooltip-text');
-    if (!tooltipText) return;
-    
-    // Get positions
-    const rect = tooltip.getBoundingClientRect();
-    const tooltipRect = tooltipText.getBoundingClientRect();
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-    
-    // Default position (above)
-    let top = rect.top - tooltipRect.height - 10;
-    let left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
-    
-    // Check if tooltip goes above viewport
-    if (top < 10) {
-      top = rect.bottom + 10; // Place below instead
-    }
-    
-    // Check if tooltip goes beyond left edge
-    if (left < 10) {
-      left = 10;
-    }
-    
-    // Check if tooltip goes beyond right edge
-    if (left + tooltipRect.width > viewportWidth - 10) {
-      left = viewportWidth - tooltipRect.width - 10;
-    }
-    
-    tooltipText.style.top = top + 'px';
-    tooltipText.style.left = left + 'px';
+  const tooltipText = tooltip.querySelector('.tooltip-text');
+  if (!tooltipText) return;
+
+  // reset first
+  tooltipText.style.top = '';
+  tooltipText.style.left = '';
+
+  const tooltipRect = tooltipText.getBoundingClientRect();
+  const triggerRect = tooltip.getBoundingClientRect();
+
+  let top = -(tooltipRect.height + 12);
+  let left = (triggerRect.width / 2) - (tooltipRect.width / 2);
+
+  // prevent overflow on left
+  if (triggerRect.left + left < 10) {
+    left = -triggerRect.left + 10;
   }
+
+  // prevent overflow on right
+  if (triggerRect.left + left + tooltipRect.width > window.innerWidth - 10) {
+    left =
+      window.innerWidth -
+      triggerRect.left -
+      tooltipRect.width -
+      10;
+  }
+
+  // if not enough space above, show below
+  if (triggerRect.top - tooltipRect.height < 10) {
+    top = triggerRect.height + 12;
+  }
+
+  tooltipText.style.top = `${top}px`;
+  tooltipText.style.left = `${left}px`;
+}
 
   // Handle tooltip click (for mobile) and hover (for desktop)
   function initTooltips() {

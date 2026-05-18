@@ -611,7 +611,7 @@ body {
   text-align: left;
   border-radius: 12px;
   padding: 12px 16px;
-  position: fixed;
+  position: absolute;
   z-index: 10000;
   font-size: 0.85rem;
   font-weight: 500;
@@ -763,5 +763,64 @@ body {
 
   .profile-frame {
     break-inside: avoid;
+  }
+
+  /* Fix for gradient text in print */
+  .hero-title,
+  .name {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    color: #0f3b4f !important;
+  }
+
+  /* Hide watermarks in print */
+  .left-panel::before,
+  .left-panel::after {
+    display: none !important;
+  }
+
+  /* Hide tooltips in print */
+  .tooltip .tooltip-text {
+    display: none !important;
+  }
+
+  /* Ensure all text is visible */
+  .hero-subtitle {
+    background: #f5f5f5 !important;
+    border-left: 4px solid #eab354 !important;
+    color: #333 !important;
+  }
+
+  /* Remove gradients from badges */
+  .skill-badge,
+  .interest-badge {
+    background: #eee !important;
+    color: #333 !important;
+    border: 1px solid #ccc;
+  }
+
+  /* Ensure links are visible */
+  a {
+    color: #333 !important;
+    text-decoration: none;
+  }
+
+  /* Keep duration badges printable */
+  .duration,
+  .edu-year {
+    background: #eee !important;
+    color: #333 !important;
+    border: 1px solid #ccc;
+  }
+
+  /* Fix for project highlight border */
+  .project-highlight {
+    border-left: 3px solid #eab354 !important;
+  }
+
+  /* Fix for section title border */
+  .section-title {
+    border-left: 3px solid #eab354 !important;
   }
 }
