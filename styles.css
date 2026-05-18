@@ -823,4 +823,8 @@ body {
   .section-title {
     border-left: 3px solid #eab354 !important;
   }
+
+  .footer-note {
+    display: none !important;
+  }
 }
