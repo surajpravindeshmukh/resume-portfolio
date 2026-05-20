@@ -26,7 +26,6 @@ body {
   padding: 28px 20px;
 }
 
-/* main card */
 .resume-card {
   max-width: 1300px;
   margin: 0 auto;
@@ -37,13 +36,11 @@ body {
   transition: all 0.2s;
 }
 
-/* two column layout */
 .resume-grid {
   display: flex;
   flex-wrap: wrap;
 }
 
-/* LEFT PANEL: approx 30% */
 .left-panel {
   width: 30%;
   background: #fbfdfe;
@@ -52,7 +49,6 @@ body {
   position: relative;
 }
 
-/* RIGHT PANEL: 70% */
 .right-panel {
   width: 70%;
   padding: 2.2rem 2.5rem;
@@ -86,7 +82,6 @@ body {
   pointer-events: none;
 }
 
-/* Fallback Pattern */
 .fallback-pattern {
   position: absolute;
   inset: 0;
@@ -127,7 +122,7 @@ body {
   -webkit-background-clip: text;
   color: transparent;
   margin-bottom: 0.5rem;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.5px;
 }
 
 .role-tag {
@@ -185,7 +180,6 @@ body {
 }
 
 .contact-item a:hover {
-  /* color: var(--primary-dark); */
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -236,7 +230,7 @@ body {
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.5px;
   margin-bottom: 18px;
 }
 
@@ -399,7 +393,6 @@ body {
 }
 
 .edu-institute a:hover {
-  /* color: var(--primary-dark); */
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -419,18 +412,6 @@ body {
 
 .edu-year i {
   font-size: 0.7rem;
-}
-
-/* Mobile adjustment */
-@media (max-width: 780px) {
-  .edu-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .edu-year {
-    white-space: normal;
-  }
 }
 
 /* ========= WATERMARKS ========= */
@@ -535,7 +516,6 @@ body {
 }
 
 .cert-name a:hover {
-  /* color: var(--secondary); */
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -596,8 +576,6 @@ body {
   display: inline-block;
   cursor: help;
   border-bottom: 1px dashed var(--accent);
-  /* padding: 0 4px; */
-  /* border-radius: 6px; */
   transition: all 0.2s ease;
 }
 
@@ -631,7 +609,6 @@ body {
 }
 
 /* ========= RESPONSIVENESS ========= */
-/* Tablet and below */
 @media (max-width: 1000px) {
   .left-panel {
     width: 33%;
@@ -648,7 +625,6 @@ body {
   }
 }
 
-/* Mobile */
 @media (max-width: 780px) {
   body {
     padding: 14px;
@@ -690,6 +666,7 @@ body {
 
   .hero-title {
     font-size: 2rem;
+    display: none;
   }
 
   .role-spacing {
@@ -705,17 +682,25 @@ body {
     white-space: normal;
   }
 
-  /* Hide watermarks on mobile */
   .left-panel::before,
   .left-panel::after {
     display: none;
   }
+
+  .edu-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .edu-year {
+    white-space: normal;
+  }
 }
 
-/* Small mobile */
 @media (max-width: 480px) {
   .hero-title {
     font-size: 1.8rem;
+    flex-direction: column;
   }
 
   .right-panel,
@@ -733,14 +718,8 @@ body {
     margin-top: 8px;
     font-size: 1.3rem;
   }
-
-  .hero-title {
-    display: flex;
-    flex-direction: column;
-  }
 }
 
-/* Tooltip mobile adjustment */
 @media (max-width: 768px) {
   .tooltip .tooltip-text {
     width: 260px;
@@ -749,7 +728,19 @@ body {
   }
 }
 
-/* Print styles */
+/* Hide name in left panel on desktop */
+@media (min-width: 781px) {
+  .left-panel .name {
+    display: none;
+  }
+}
+
+/* Hide print role tag on screen */
+.print-role-tag {
+  display: none !important;
+}
+
+/* ========= PRINT STYLES ========= */
 @media print {
   body {
     background: white;
@@ -774,13 +765,9 @@ body {
     color: #0f3b4f !important;
   }
 
-  /* Hide watermarks in print */
+  /* Hide watermarks & tooltips in print */
   .left-panel::before,
-  .left-panel::after {
-    display: none !important;
-  }
-
-  /* Hide tooltips in print */
+  .left-panel::after,
   .tooltip .tooltip-text {
     display: none !important;
   }
@@ -794,7 +781,9 @@ body {
 
   /* Remove gradients from badges */
   .skill-badge,
-  .interest-badge {
+  .interest-badge,
+  .duration,
+  .edu-year {
     background: #eee !important;
     color: #333 !important;
     border: 1px solid #ccc;
@@ -806,25 +795,33 @@ body {
     text-decoration: none;
   }
 
-  /* Keep duration badges printable */
-  .duration,
-  .edu-year {
-    background: #eee !important;
-    color: #333 !important;
-    border: 1px solid #ccc;
-  }
-
-  /* Fix for project highlight border */
-  .project-highlight {
-    border-left: 3px solid #eab354 !important;
-  }
-
-  /* Fix for section title border */
+  /* Fix for borders */
+  .project-highlight,
   .section-title {
     border-left: 3px solid #eab354 !important;
   }
 
-  .footer-note {
+  /* Hide elements */
+  .footer-note,
+  .profile-wrapper,
+  .left-panel .role-tag {
     display: none !important;
+  }
+
+  /* Show print role tag */
+  .print-role-tag {
+    display: block !important;
+    margin-top: -15px;
+    margin-bottom: 20px;
+  }
+
+  .tooltip {
+    border-bottom: none;
+  }
+
+    .left-panel {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
   }
 }
