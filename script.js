@@ -395,7 +395,7 @@
 
         const link = document.createElement('a');
 
-        link.href = '/downloads/resume.pdf';
+        link.href = './downloads/resume.pdf';
         link.download = 'Suraj_Deshmukh_Resume.pdf';
 
         document.body.appendChild(link);
