@@ -385,24 +385,24 @@
   }
 
   function initPDFDownload1() {
-    const downloadBtn = document.getElementById('downloadResumePdfBtn');
+    const downloadBtns = document.querySelectorAll('#downloadResumePdfBtnDesktop, #downloadResumePdfBtnMobile');
 
-    if (downloadBtn) {
-      downloadBtn.addEventListener('click', function (e) {
+    downloadBtns.forEach(btn => {
+      if (btn) {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
 
-        e.preventDefault();
-        e.stopPropagation();
+          const link = document.createElement('a');
+          link.href = './downloads/resume.pdf';
+          link.download = 'Suraj_Deshmukh_Resume.pdf';
 
-        const link = document.createElement('a');
-
-        link.href = './downloads/resume.pdf';
-        link.download = 'Suraj_Deshmukh_Resume.pdf';
-
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      });
-    }
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        });
+      }
+    });
   }
 
   // Wait for DOM to be fully loaded
