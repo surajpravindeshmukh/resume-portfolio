@@ -4,13 +4,13 @@
  * Includes mobile-friendly tooltips and interactive UI elements
  */
 
-(function() {
+(function () {
   'use strict';
 
   // ============================================
   // SECTION 1: DYNAMIC EXPERIENCE CALCULATOR
   // ============================================
-  
+
   // Function to calculate experience from start date to today
   function calculateTotalExperience(startDate) {
     const today = new Date();
@@ -107,55 +107,55 @@
 
   // Position tooltip to prevent cropping
   function positionTooltip(tooltip) {
-  const tooltipText = tooltip.querySelector('.tooltip-text');
-  if (!tooltipText) return;
+    const tooltipText = tooltip.querySelector('.tooltip-text');
+    if (!tooltipText) return;
 
-  // reset first
-  tooltipText.style.top = '';
-  tooltipText.style.left = '';
+    // reset first
+    tooltipText.style.top = '';
+    tooltipText.style.left = '';
 
-  const tooltipRect = tooltipText.getBoundingClientRect();
-  const triggerRect = tooltip.getBoundingClientRect();
+    const tooltipRect = tooltipText.getBoundingClientRect();
+    const triggerRect = tooltip.getBoundingClientRect();
 
-  let top = -(tooltipRect.height + 12);
-  let left = (triggerRect.width / 2) - (tooltipRect.width / 2);
+    let top = -(tooltipRect.height + 12);
+    let left = (triggerRect.width / 2) - (tooltipRect.width / 2);
 
-  // prevent overflow on left
-  if (triggerRect.left + left < 10) {
-    left = -triggerRect.left + 10;
+    // prevent overflow on left
+    if (triggerRect.left + left < 10) {
+      left = -triggerRect.left + 10;
+    }
+
+    // prevent overflow on right
+    if (triggerRect.left + left + tooltipRect.width > window.innerWidth - 10) {
+      left =
+        window.innerWidth -
+        triggerRect.left -
+        tooltipRect.width -
+        10;
+    }
+
+    // if not enough space above, show below
+    if (triggerRect.top - tooltipRect.height < 10) {
+      top = triggerRect.height + 12;
+    }
+
+    tooltipText.style.top = `${top}px`;
+    tooltipText.style.left = `${left}px`;
   }
-
-  // prevent overflow on right
-  if (triggerRect.left + left + tooltipRect.width > window.innerWidth - 10) {
-    left =
-      window.innerWidth -
-      triggerRect.left -
-      tooltipRect.width -
-      10;
-  }
-
-  // if not enough space above, show below
-  if (triggerRect.top - tooltipRect.height < 10) {
-    top = triggerRect.height + 12;
-  }
-
-  tooltipText.style.top = `${top}px`;
-  tooltipText.style.left = `${left}px`;
-}
 
   // Handle tooltip click (for mobile) and hover (for desktop)
   function initTooltips() {
     const tooltips = document.querySelectorAll('.tooltip');
-    
+
     tooltips.forEach(tooltip => {
       // Remove existing listeners to avoid duplicates
       tooltip.removeEventListener('click', handleTooltipClick);
       tooltip.removeEventListener('mouseenter', handleTooltipHover);
       tooltip.removeEventListener('mouseleave', handleTooltipLeave);
-      
+
       // Add click listener for mobile (works on desktop too)
       tooltip.addEventListener('click', handleTooltipClick);
-      
+
       // Add hover listeners for desktop experience
       tooltip.addEventListener('mouseenter', handleTooltipHover);
       tooltip.addEventListener('mouseleave', handleTooltipLeave);
@@ -165,17 +165,17 @@
   function handleTooltipClick(e) {
     e.preventDefault();
     e.stopPropagation();
-    
+
     const tooltip = this;
     const isActive = tooltip.classList.contains('active');
-    
+
     // Close all other tooltips
     document.querySelectorAll('.tooltip.active').forEach(tt => {
       if (tt !== tooltip) {
         tt.classList.remove('active');
       }
     });
-    
+
     // Toggle current tooltip
     if (!isActive) {
       tooltip.classList.add('active');
@@ -203,7 +203,7 @@
 
   // Close tooltip when clicking elsewhere
   function closeTooltipOnOutsideClick() {
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
       if (!e.target.closest('.tooltip')) {
         document.querySelectorAll('.tooltip.active').forEach(tooltip => {
           tooltip.classList.remove('active');
@@ -214,15 +214,15 @@
 
   // Reposition tooltips on scroll or resize
   function repositionTooltipsOnScroll() {
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
       document.querySelectorAll('.tooltip.active').forEach(tooltip => {
         positionTooltip(tooltip);
       });
     });
   }
-  
+
   function repositionTooltipsOnResize() {
-    window.addEventListener('resize', function() {
+    window.addEventListener('resize', function () {
       document.querySelectorAll('.tooltip.active').forEach(tooltip => {
         setTimeout(() => positionTooltip(tooltip), 50);
       });
@@ -232,10 +232,10 @@
   // ============================================
   // SECTION 3: SMOOTH SCROLLING FOR ANCHOR LINKS
   // ============================================
-  
+
   function initSmoothScrolling() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
+      anchor.addEventListener('click', function (e) {
         const targetId = this.getAttribute('href');
         if (targetId && targetId !== '#') {
           const targetElement = document.querySelector(targetId);
@@ -254,11 +254,11 @@
   // ============================================
   // SECTION 4: SKILL BADGE ANIMATIONS
   // ============================================
-  
+
   function initSkillBadgeAnimations() {
     const skillBadges = document.querySelectorAll('.skill-badge');
     skillBadges.forEach(badge => {
-      badge.addEventListener('click', function() {
+      badge.addEventListener('click', function () {
         this.style.transform = 'scale(0.95)';
         setTimeout(() => {
           this.style.transform = '';
@@ -270,14 +270,14 @@
   // ============================================
   // SECTION 5: FADE-IN ANIMATIONS FOR JOB ITEMS
   // ============================================
-  
+
   function initFadeInAnimations() {
     const jobItems = document.querySelectorAll('.job-item, .edu-item');
     jobItems.forEach((item, index) => {
       item.style.opacity = '0';
       item.style.transform = 'translateY(10px)';
       item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-      
+
       setTimeout(() => {
         item.style.opacity = '1';
         item.style.transform = 'translateY(0)';
@@ -288,15 +288,15 @@
   // ============================================
   // SECTION 6: CONTACT ITEMS HOVER EFFECTS
   // ============================================
-  
+
   function initContactHoverEffects() {
     const contactItems = document.querySelectorAll('.contact-item');
     contactItems.forEach(item => {
-      item.addEventListener('mouseenter', function() {
+      item.addEventListener('mouseenter', function () {
         // this.style.transform = 'translateX(5px)';
         // this.style.transition = 'transform 0.2s ease';
       });
-      item.addEventListener('mouseleave', function() {
+      item.addEventListener('mouseleave', function () {
         // this.style.transform = 'translateX(0)';
       });
     });
@@ -305,11 +305,11 @@
   // ============================================
   // SECTION 7: LINKEDIN LINK HANDLER
   // ============================================
-  
+
   function initLinkedInLink() {
     const linkedinLink = document.querySelector('.contact-item a[href="#"]');
     if (linkedinLink && linkedinLink.getAttribute('href') === '#') {
-      linkedinLink.addEventListener('click', function(e) {
+      linkedinLink.addEventListener('click', function (e) {
         e.preventDefault();
         console.log('LinkedIn profile link - update with actual URL when available');
       });
@@ -319,7 +319,7 @@
   // ============================================
   // SECTION 8: LAZY LOADING & VIEWPORT FIXES
   // ============================================
-  
+
   function initLazyLoading() {
     const profileImage = document.querySelector('.profile-frame img');
     if (profileImage) {
@@ -332,7 +332,7 @@
       const vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
     };
-    
+
     window.addEventListener('resize', setVH);
     setVH();
   }
@@ -340,19 +340,19 @@
   // ============================================
   // SECTION 9: INITIALIZE EVERYTHING
   // ============================================
-  
+
   function init() {
     console.log('🚀 Suraj Deshmukh Resume - Initializing...');
-    
+
     // Initialize experience calculator
     updateExperienceInHero();
-    
+
     // Initialize tooltips (mobile + desktop)
     initTooltips();
     closeTooltipOnOutsideClick();
     repositionTooltipsOnScroll();
     repositionTooltipsOnResize();
-    
+
     // Initialize interactive features
     initSmoothScrolling();
     initSkillBadgeAnimations();
@@ -361,8 +361,48 @@
     initLinkedInLink();
     initLazyLoading();
     initViewportFix();
-    
+
+    // Initialize PDF download
+    initPDFDownload();
+    initPDFDownload1();
+
     console.log('✅ All features initialized successfully!');
+  }
+
+  // ============================================
+  // SECTION 10: PDF DOWNLOAD ON ROLE TAG CLICK
+  // ============================================
+
+  function initPDFDownload() {
+    const downloadBtn = document.getElementById('downloadResumeBtn');
+    if (downloadBtn) {
+      downloadBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        window.print();
+      });
+    }
+  }
+
+  function initPDFDownload1() {
+    const downloadBtn = document.getElementById('downloadResumePdfBtn');
+
+    if (downloadBtn) {
+      downloadBtn.addEventListener('click', function (e) {
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        const link = document.createElement('a');
+
+        link.href = '/downloads/resume.pdf';
+        link.download = 'Suraj_Deshmukh_Resume.pdf';
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    }
   }
 
   // Wait for DOM to be fully loaded

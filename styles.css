@@ -819,9 +819,39 @@ body {
     border-bottom: none;
   }
 
-    .left-panel {
+  .left-panel {
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
+  }
+}
+
+/* ========= SWAP PANELS (Left becomes Right) ========= */
+.resume-grid {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+}
+
+/* Adjust border when panels are swapped */
+.left-panel {
+  width: 30%;
+  background: #fbfdfe;
+  border-left: 1px solid var(--border-light);
+  border-right: none;
+  padding: 2rem 1.8rem;
+  position: relative;
+}
+
+/* Reset on mobile */
+@media (max-width: 780px) {
+  .resume-grid {
+    flex-direction: column;
+  }
+
+  .left-panel {
+    border-left: none;
+    border-bottom: 1px solid var(--border-light);
+    border-right: none;
   }
 }

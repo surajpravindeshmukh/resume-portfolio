@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <title>Suraj Deshmukh - Team Lead - Senior Software Engineer</title>
 
   <!-- Fonts -->
@@ -17,6 +16,9 @@
 
   <!-- External CSS -->
   <link rel="stylesheet" href="styles.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml"
@@ -63,11 +65,13 @@
         <!-- <div class="name">Team Lead · Software Engineer</div> -->
         <div class="name">Suraj Deshmukh</div>
         <div style="text-align: center; margin-bottom: 1rem;">
-          <span class="role-tag"><i class="fas fa-code-branch"></i> Team Lead · Software Engineer</span>
+          <span class="role-tag" id="downloadResumeBtn" style="cursor: pointer;"><i class="fas fa-code-branch"></i> Team
+            Lead · Software Engineer</span>
         </div>
 
         <!-- Contact block -->
-        <div class="section-title first-section"><i class="fas fa-address-card" style="margin-right: 8px;"></i> Contact</div>
+        <div class="section-title first-section"><i class="fas fa-address-card" style="margin-right: 8px;"></i> Contact
+        </div>
         <div class="contact-list">
           <div class="contact-item">
             <i class="fas fa-phone-alt"></i>
@@ -175,7 +179,7 @@
       <main class="right-panel">
 
         <div class="hero-section">
-          <div class="hero-title">
+          <div class="hero-title" id="downloadResumePdfBtn" style="cursor: pointer;">
             <!-- Team Lead <span class="role-spacing"> · Software Engineer</span> -->
             Suraj Deshmukh
           </div>
