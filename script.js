@@ -102,132 +102,9 @@
   }
 
   // ============================================
-  // SECTION 2: SMART TOOLTIP (Mobile + Desktop)
+  // SECTION 2: INTERACTIVE MODALS
   // ============================================
-
-  // Position tooltip to prevent cropping
-  function positionTooltip(tooltip) {
-    const tooltipText = tooltip.querySelector('.tooltip-text');
-    if (!tooltipText) return;
-
-    // reset first
-    tooltipText.style.top = '';
-    tooltipText.style.left = '';
-
-    const tooltipRect = tooltipText.getBoundingClientRect();
-    const triggerRect = tooltip.getBoundingClientRect();
-
-    let top = -(tooltipRect.height + 12);
-    let left = (triggerRect.width / 2) - (tooltipRect.width / 2);
-
-    // prevent overflow on left
-    if (triggerRect.left + left < 10) {
-      left = -triggerRect.left + 10;
-    }
-
-    // prevent overflow on right
-    if (triggerRect.left + left + tooltipRect.width > window.innerWidth - 10) {
-      left =
-        window.innerWidth -
-        triggerRect.left -
-        tooltipRect.width -
-        10;
-    }
-
-    // if not enough space above, show below
-    if (triggerRect.top - tooltipRect.height < 10) {
-      top = triggerRect.height + 12;
-    }
-
-    tooltipText.style.top = `${top}px`;
-    tooltipText.style.left = `${left}px`;
-  }
-
-  // Handle tooltip click (for mobile) and hover (for desktop)
-  function initTooltips() {
-    const tooltips = document.querySelectorAll('.tooltip');
-
-    tooltips.forEach(tooltip => {
-      // Remove existing listeners to avoid duplicates
-      tooltip.removeEventListener('click', handleTooltipClick);
-      tooltip.removeEventListener('mouseenter', handleTooltipHover);
-      tooltip.removeEventListener('mouseleave', handleTooltipLeave);
-
-      // Add click listener for mobile (works on desktop too)
-      tooltip.addEventListener('click', handleTooltipClick);
-
-      // Add hover listeners for desktop experience
-      tooltip.addEventListener('mouseenter', handleTooltipHover);
-      tooltip.addEventListener('mouseleave', handleTooltipLeave);
-    });
-  }
-
-  function handleTooltipClick(e) {
-    e.preventDefault();
-    e.stopPropagation();
-
-    const tooltip = this;
-    const isActive = tooltip.classList.contains('active');
-
-    // Close all other tooltips
-    document.querySelectorAll('.tooltip.active').forEach(tt => {
-      if (tt !== tooltip) {
-        tt.classList.remove('active');
-      }
-    });
-
-    // Toggle current tooltip
-    if (!isActive) {
-      tooltip.classList.add('active');
-      // Position the tooltip after a tiny delay to ensure it's visible
-      setTimeout(() => positionTooltip(tooltip), 10);
-    } else {
-      tooltip.classList.remove('active');
-    }
-  }
-
-  function handleTooltipHover(e) {
-    // On desktop, show tooltip on hover
-    if (window.innerWidth > 768) {
-      this.classList.add('active');
-      setTimeout(() => positionTooltip(this), 10);
-    }
-  }
-
-  function handleTooltipLeave(e) {
-    // On desktop, hide tooltip on leave
-    if (window.innerWidth > 768) {
-      this.classList.remove('active');
-    }
-  }
-
-  // Close tooltip when clicking elsewhere
-  function closeTooltipOnOutsideClick() {
-    document.addEventListener('click', function (e) {
-      if (!e.target.closest('.tooltip')) {
-        document.querySelectorAll('.tooltip.active').forEach(tooltip => {
-          tooltip.classList.remove('active');
-        });
-      }
-    });
-  }
-
-  // Reposition tooltips on scroll or resize
-  function repositionTooltipsOnScroll() {
-    window.addEventListener('scroll', function () {
-      document.querySelectorAll('.tooltip.active').forEach(tooltip => {
-        positionTooltip(tooltip);
-      });
-    });
-  }
-
-  function repositionTooltipsOnResize() {
-    window.addEventListener('resize', function () {
-      document.querySelectorAll('.tooltip.active').forEach(tooltip => {
-        setTimeout(() => positionTooltip(tooltip), 50);
-      });
-    });
-  }
+  // Modal system handles all interactive content
 
   // ============================================
   // SECTION 3: SMOOTH SCROLLING FOR ANCHOR LINKS
@@ -347,12 +224,6 @@
     // Initialize experience calculator
     updateExperienceInHero();
 
-    // Initialize tooltips (mobile + desktop)
-    initTooltips();
-    closeTooltipOnOutsideClick();
-    repositionTooltipsOnScroll();
-    repositionTooltipsOnResize();
-
     // Initialize interactive features
     initSmoothScrolling();
     initSkillBadgeAnimations();
@@ -365,6 +236,8 @@
     // Initialize PDF download
     initPDFDownload();
     initPDFDownload1();
+
+    initInterestModal();
 
     console.log('✅ All features initialized successfully!');
   }
@@ -404,6 +277,284 @@
       }
     });
   }
+
+  // Modal functionality for interests
+  function initInterestModal() {
+    const modal = document.getElementById('interestModal');
+    const modalBody = document.getElementById('modalBody');
+    const closeBtn = document.querySelector('.modal-close');
+
+    // Content for each interest
+    const contentMap = {
+      travel: {
+        title: 'Travel & Motorcycle Riding',
+        body: `
+        <h4 style="color: var(--secondary); margin: 0 0 10px 0;">Travel</h4>
+        <p><strong>Traveled across 9 Indian states</strong><br>
+        <strong>Explored 2 countries</strong> alongside family and friends</p>
+    
+        <h4 style="color: var(--secondary); margin: 20px 0 10px 0;">Motorcycle Riding</h4>
+        <p>I have always been passionate about motorcycle riding. From riding to college during student life to commuting to office after starting my career, bikes have always been a part of my journey.</p>
+        <p>I currently own a <strong>Triumph Scrambler 400X</strong>, and riding gives me a sense of peace and freedom. I now ride occasionally whenever I get time away from work.</p>
+        <p style="margin-top: 20px; font-style: italic; opacity: 0.8;">✨ Looking forward to adding more stamps to the passport and more trails to the tires</p>
+        `
+      },
+      numismatics: {
+        title: 'Numismatics',
+        body: `
+        <p>I developed an interest in collecting coins and currencies when my family and I started visiting foreign countries.</p>
+        <p>Over time, it became a meaningful way to preserve memories, cultures, and travel experiences. Each coin tells a unique story from a different corner of the world.</p>
+      `
+      },
+      social: {
+        title: 'Social Experiences',
+        body: `
+        <p>I deeply value meaningful social connections and collaborative environments:</p>
+        <ul>
+          <li>Social gatherings with friends and family</li>
+          <li>Team outings and offsites</li>
+          <li>Networking & knowledge sharing sessions</li>
+          <li>Hanging out with friends over coffee</li>
+        </ul>
+        <p>These experiences enrich both personal and professional life.</p>
+      `
+      },
+      // Hero subtitle topics
+      'angular-dotnet': {
+        title: 'Angular & .NET Solutions',
+        body: `
+        <ul>
+          <li>Built with Angular 21 & .NET Web API</li>
+          <li>Delivered full-stack enterprise applications</li>
+          <li>Integrated REST APIs & databases</li>
+        </ul>
+      `
+      },
+      mentoring: {
+        title: 'Mentoring Developers',
+        body: `
+        <ul>
+          <li>Led team of 4-6 developers</li>
+          <li>Provided debugging guidance & technical mentoring</li>
+          <li>Regular code reviews & knowledge sharing</li>
+        </ul>
+      `
+      },
+      'technical-design': {
+        title: 'Technical Design Work',
+        body: `
+        <ul>
+          <li>Upgraded Angular 10 → 21 across projects</li>
+          <li>Migrated from older frameworks to modern Angular</li>
+          <li>Improved performance using lazy loading</li>
+        </ul>
+      `
+      },
+      'large-scale': {
+        title: 'Large-Scale Systems',
+        body: `
+        <ul>
+          <li>Designed scalable frontend architecture</li>
+          <li>Built secure fintech solutions</li>
+          <li>Created reusable components across projects</li>
+        </ul>
+      `
+      },
+      // Sodel Solutions projects
+      'yes-pay': {
+        title: 'YES Pay Suite',
+        body: `
+        <p><strong>YES Pay Assist:</strong> Admin portal - manage partner configurations</p>
+        <p><strong>YES Pay Hub:</strong> Partner portal - digital product management</p>
+        <p><strong>FD Portal:</strong> Fixed deposit opening & management</p>
+        <p><strong>Dynamic URLs:</strong> Welcome letters & partner links</p>
+        <p><strong>Gift Card Portal:</strong> Issuance & redemption platform</p>
+      `
+      },
+      derivium: {
+        title: 'DeriviumData',
+        body: `
+        <p><strong>Financial Securities Analytics Platform</strong></p>
+        <ul>
+          <li>Search & track stocks, shares using ISIN, DID, symbols</li>
+          <li>Price movements, trade volumes & transaction trends</li>
+          <li>Analytics-driven insights on trading patterns & market activity</li>
+        </ul>
+      `
+      },
+      gsb: {
+        title: 'GSB Bookings',
+        body: `
+        <p><strong>Temple Management System</strong></p>
+        <ul>
+          <li>Manages multiple temples under single trust</li>
+          <li>Event & Puja booking system for devotees</li>
+          <li>Admin portal for backend management</li>
+        </ul>
+      `
+      },
+      hammer: {
+        title: 'HAMMER',
+        body: `
+        <p><strong>Legacy Migration Project</strong></p>
+        <ul>
+          <li>Migrated Fox Pro application to .NET</li>
+          <li>JavaScript for frontend development</li>
+          <li>Modernized legacy system architecture</li>
+        </ul>
+      `
+      },
+      // MITS Global projects
+      plum: {
+        title: 'PLUM',
+        body: `
+        <ul>
+          <li>Lead management system for partners</li>
+          <li>Managed partner onboarding & tracking workflows</li>
+        </ul>
+      `
+      },
+      swift: {
+        title: 'SWIFT',
+        body: `
+        <ul>
+          <li>Digital client on-boarding platform</li>
+          <li>Real-time transaction tracking</li>
+          <li>Customer insights & analytics</li>
+          <li>Auto-filled investor applications</li>
+          <li>Top-up & redemption transactions</li>
+        </ul>
+      `
+      },
+      // Green Point projects
+      'tg-campus': {
+        title: 'TG Campus',
+        body: `
+        <ul>
+          <li>Online learning & test prep platform for grades 5-12</li>
+          <li>LMS with live classes, recorded sessions & interactive learning</li>
+          <li>Batch, course, section, lecture & live session management</li>
+          <li>Assessments, self-practice & motivation-based learning modules</li>
+        </ul>
+      `
+      },
+      cms: {
+        title: 'CMS',
+        body: `
+        <p><strong>Centralized Content Management System</strong> integrated with TG Campus</p>
+        <ul>
+          <li>Manage & map questionnaire and assessment content</li>
+          <li>Content assigned to batches, courses, sections, lectures & live sessions</li>
+          <li>Structured content delivery & assessment integration</li>
+        </ul>
+      `
+      }
+    };
+
+    let hoverTimeout;
+    let isModalVisible = false;
+
+    // Get all modal triggers
+    const triggers = document.querySelectorAll('.modal-trigger');
+
+    triggers.forEach(trigger => {
+      // Hover events for desktop
+      trigger.addEventListener('mouseenter', function (e) {
+        if (window.innerWidth > 768) {
+          clearTimeout(hoverTimeout);
+          const modalId = this.getAttribute('data-modal');
+          const content = contentMap[modalId];
+
+        if (content) {
+            // Build modal content
+            const iconElement = this.querySelector('i');
+            const iconClass = iconElement ? iconElement.className : 'fas fa-info-circle';
+            
+            modalBody.innerHTML = `
+            <div class="modal-header">
+              <h3><i class="${iconClass}"></i> ${content.title}</h3>
+            </div>
+            <div class="modal-body">
+              ${content.body}
+            </div>
+          `;
+
+            // Show the modal centered by CSS flexbox
+            modal.style.display = 'flex';
+            modal.classList.add('active');
+            isModalVisible = true;
+          }
+        }
+      });
+
+      trigger.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 768) {
+          hoverTimeout = setTimeout(() => {
+            modal.classList.remove('active');
+            modal.style.display = 'none';
+            isModalVisible = false;
+          }, 200);
+        }
+      });
+
+      // Click events for mobile
+      trigger.addEventListener('click', function (e) {
+        if (window.innerWidth <= 768) {
+          e.stopPropagation();
+          const modalId = this.getAttribute('data-modal');
+          const content = contentMap[modalId];
+
+          if (content) {
+            const iconElement = this.querySelector('i');
+            const iconClass = iconElement ? iconElement.className : 'fas fa-info-circle';
+            
+            modalBody.innerHTML = `
+            <div class="modal-header">
+              <h3><i class="${iconClass}"></i> ${content.title}</h3>
+            </div>
+            <div class="modal-body">
+              ${content.body}
+            </div>
+          `;
+            modal.style.display = 'flex';
+            modal.classList.add('active');
+          }
+        }
+      });
+    });
+
+    // Close modal
+    function closeModal() {
+      modal.style.display = 'none';
+      modal.classList.remove('active');
+      isModalVisible = false;
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+
+    // Close on outside click
+    window.addEventListener('click', function (e) {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Prevent modal from closing when hovering over it
+    modal.addEventListener('mouseenter', function () {
+      if (window.innerWidth > 768) {
+        clearTimeout(hoverTimeout);
+      }
+    });
+
+    modal.addEventListener('mouseleave', function () {
+      if (window.innerWidth > 768) {
+        closeModal();
+      }
+    });
+  }
+
+  // Call this in your init() function
+  // Add: initInterestModal();
 
   // Wait for DOM to be fully loaded
   if (document.readyState === 'loading') {

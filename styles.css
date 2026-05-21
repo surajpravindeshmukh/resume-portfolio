@@ -571,42 +571,7 @@ body {
 }
 
 /* ========= TOOLTIP STYLES ========= */
-.tooltip {
-  position: relative;
-  display: inline-block;
-  cursor: help;
-  border-bottom: 1px dashed var(--accent);
-  transition: all 0.2s ease;
-}
-
-.tooltip .tooltip-text {
-  visibility: hidden;
-  opacity: 0;
-  width: 300px;
-  max-width: 80vw;
-  background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
-  color: #fff;
-  text-align: left;
-  border-radius: 12px;
-  padding: 12px 16px;
-  position: absolute;
-  z-index: 10000;
-  font-size: 0.85rem;
-  font-weight: 500;
-  line-height: 1.5;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  transition: all 0.2s ease;
-  pointer-events: none;
-  font-family: 'Inter', sans-serif;
-  white-space: normal;
-  word-wrap: break-word;
-}
-
-.tooltip:hover .tooltip-text,
-.tooltip.active .tooltip-text {
-  visibility: visible;
-  opacity: 1;
-}
+/* Tooltips removed - now using modal system */
 
 /* ========= RESPONSIVENESS ========= */
 @media (max-width: 1000px) {
@@ -765,10 +730,9 @@ body {
     color: #0f3b4f !important;
   }
 
-  /* Hide watermarks & tooltips in print */
+  /* Hide watermarks in print */
   .left-panel::before,
-  .left-panel::after,
-  .tooltip .tooltip-text {
+  .left-panel::after {
     display: none !important;
   }
 
@@ -815,10 +779,6 @@ body {
     margin-bottom: 20px;
   }
 
-  .tooltip {
-    border-bottom: none;
-  }
-
   .left-panel {
     display: flex !important;
     flex-direction: column !important;
@@ -835,5 +795,121 @@ body {
   .left-panel {
     border-left: 1px solid var(--border-light);
     border-right: none;
+  }
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  position: relative;
+  background: linear-gradient(135deg, #fff, #f8fafc);
+  margin: auto;
+  padding: 0;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: modalFadeIn 0.2s ease-out;
+  overflow: hidden;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-header {
+  background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+  padding: 20px 24px;
+  color: white;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.modal-header h3 i {
+  font-size: 1.6rem;
+}
+
+.modal-body {
+  padding: 24px;
+  color: var(--text-dark);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.modal-body p {
+  margin-bottom: 12px;
+}
+
+.modal-body ul {
+  margin-top: 8px;
+  padding-left: 20px;
+}
+
+.modal-body li {
+  margin-bottom: 6px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  z-index: 1;
+}
+
+.modal-close:hover {
+  opacity: 0.8;
+}
+
+/* Hide modal on desktop by default, show on hover */
+@media (min-width: 769px) {
+  .modal-trigger {
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .modal {
+    pointer-events: none;
+  }
+  
+  .modal.active {
+    display: flex;
+  }
+}
+
+/* On mobile, click to open */
+@media (max-width: 768px) {
+  .modal-trigger {
+    cursor: pointer;
   }
 }
