@@ -849,6 +849,9 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
+  padding-right: 40px;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .modal-header h3 i {
