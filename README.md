@@ -1,40 +1,55 @@
-# Suraj Deshmukh - Senior Software Engineer & Team Lead Portfolio
+# Suraj Deshmukh — Team Lead & Senior Software Engineer Portfolio
 
-A fully responsive, modern resume web application showcasing 8+ years of experience in full-stack development, Angular migrations, .NET solutions, and technical leadership.
+A responsive personal resume web application built with HTML, CSS, and JavaScript. It highlights professional experience, technical skills, certifications, and interests with an interactive modern layout.
 
 ## 📋 Features
 
-- **Dynamic Experience Calculator** - Automatically calculates total work experience from February 26, 2018 to current date
-- **Responsive Design** - Optimized for desktop, tablet, and mobile devices
-- **Interactive Tooltips** - Mobile-friendly tooltips on hover/click for key achievements
-- **Modern UI** - Clean two-column layout with gradient accents and card-based design
-- **Pure HTML/CSS/JS** - No external frameworks or PDF dependencies
+- **Dynamic Experience Calculator** — Automatically computes total work experience from February 26, 2018 to the current date
+- **Responsive Layout** — Optimized for desktop, tablet, and mobile devices with a clean two-column card design
+- **Interactive Modals** — Hover or tap tagged items for rich detail on skills, projects, and interests
+- **PDF Resume Download** — Download the resume PDF via the built-in download controls
+- **Print-Friendly** — Supports browser print styling for a polished resume output
+- **Fallback Profile Pattern** — Uses a branded pattern when `profile.jpg` is not available
 
 ## 🛠️ Tech Stack
 
 - HTML5
 - CSS3 (Flexbox, Grid, Media Queries)
 - Vanilla JavaScript
-- Font Awesome 6 Icons
-- Google Fonts (Inter)
+- Font Awesome 6 (CDN)
+- Google Fonts: Inter
+- html2canvas & html2pdf.js (CDN)
 
-- ## 📱 Responsive Breakpoints
+## 📁 Project Structure
 
-- **Desktop** - 1300px max-width, two-column layout
-- **Tablet** (≤1000px) - Adjusted column widths
-- **Mobile** (≤780px) - Single column, left-aligned content
-- **Small Mobile** (≤480px) - Further optimizations
+- `index.html` — main resume page
+- `styles.css` — responsive styling and visual layout
+- `script.js` — dynamic experience calculator, modal handling, and resume download logic
+- `downloads/resume.pdf` — downloadable resume asset
+
+## 📱 Responsive Breakpoints
+
+- **Desktop** — 1300px max-width, two-column layout
+- **Tablet** (≤1000px) — adjusted column widths and spacing
+- **Mobile** (≤780px) — single-column layout with stacked sections
+- **Small Mobile** (≤480px) — condensed spacing and touch-friendly interactions
 
 ## 🔧 Dynamic Features
 
-- **Experience Calculator** - Automatically updates "X years Y months" based on start date (Feb 26, 2018)
-- **Smart Tooltips** - Desktop hover + mobile click with auto-positioning to prevent cropping
-- **Watermark** - Subtle "SD" and dot pattern (hidden on mobile)
-- **Fade-in Animations** - Smooth entrance for job and education items
+- **Automatic experience text** — updates contract text in the hero section with the current years/months of experience
+- **Interactive interest modals** — click or hover tags to reveal additional career and personal details
+- **Resume download actions** — click the name or role badge to download `downloads/resume.pdf`
+- **Smooth UI effects** — fade-in animations and touch interactions for skill badges and cards
 
-- ## 🤝 Contributing
+## 🚀 Usage
 
-This is a personal portfolio project. For suggestions or improvements, feel free to open an issue or reach out.
+1. Open `index.html` in a browser.
+2. Click the name or role badge to download the resume PDF.
+3. Hover or tap highlighted tags to view modal details.
+
+## 🤝 Contributing
+
+This is a personal portfolio project. Feedback and suggestions are welcome.
 
 ## 📄 License
 
