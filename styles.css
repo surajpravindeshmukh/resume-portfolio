@@ -791,7 +791,7 @@ body {
   .resume-grid {
     flex-direction: row-reverse;
   }
-  
+
   .left-panel {
     border-left: 1px solid var(--border-light);
     border-right: none;
@@ -831,6 +831,7 @@ body {
     opacity: 0;
     transform: scale(0.95);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -895,24 +896,28 @@ body {
 }
 
 /* Hide modal on desktop by default, show on hover */
-@media (min-width: 769px) {
+@media (hover: hover) and (min-width: 769px) {
   .modal-trigger {
     cursor: pointer;
     position: relative;
   }
-  
+
   .modal {
     pointer-events: none;
   }
-  
+
   .modal.active {
     display: flex;
   }
 }
 
-/* On mobile, click to open */
-@media (max-width: 768px) {
+/* On mobile / touch devices, click to open */
+@media (max-width: 768px), (hover: none) {
   .modal-trigger {
     cursor: pointer;
+  }
+
+  .modal-header h3 {
+    font-size: 1.1rem;
   }
 }

@@ -497,9 +497,9 @@
         }
       });
 
-      // Click events for mobile
+      // Click events for mobile / touch devices
       trigger.addEventListener('click', function (e) {
-        if (window.innerWidth <= 768) {
+        if (window.innerWidth <= 768 || !window.matchMedia('(hover: hover)').matches) {
           e.stopPropagation();
           const modalId = this.getAttribute('data-modal');
           const content = contentMap[modalId];
