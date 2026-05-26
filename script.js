@@ -294,31 +294,85 @@
         return;
       }
 
-      const originalMaxWidth = resumeElement.style.maxWidth;
-      const originalOverflow = resumeElement.style.overflow;
-      const originalBackground = resumeElement.style.background;
+      const cloneContainer = document.createElement('div');
+      cloneContainer.style.position = 'absolute';
+      cloneContainer.style.left = '-9999px';
+      cloneContainer.style.top = '0';
+      cloneContainer.style.width = '210mm';
+      cloneContainer.style.padding = '0';
+      cloneContainer.style.background = '#ffffff';
+      cloneContainer.style.overflow = 'hidden';
 
-      resumeElement.style.maxWidth = '210mm';
-      resumeElement.style.overflow = 'visible';
-      resumeElement.style.background = '#ffffff';
+      const clone = resumeElement.cloneNode(true);
+      clone.style.width = '190mm';
+      clone.style.maxWidth = '190mm';
+      clone.style.padding = '8mm';
+      clone.style.background = '#ffffff';
+      clone.style.color = '#111111';
+      clone.style.transform = 'scale(0.82)';
+      clone.style.transformOrigin = 'top left';
+
+      clone.querySelectorAll('i').forEach(icon => icon.remove());
+      clone.querySelectorAll('.profile-wrapper, .left-panel .role-tag, .modal-trigger, .footer-note').forEach(el => {
+        if (el) el.style.display = 'none';
+      });
+
+      const heroTitle = clone.querySelector('.hero-title');
+      if (heroTitle) {
+        heroTitle.style.background = 'none';
+        heroTitle.style.color = '#111111';
+        heroTitle.style.fontSize = '2rem';
+        heroTitle.style.fontWeight = '800';
+        heroTitle.innerHTML = 'Suraj Deshmukh<br><span style="font-size:1rem; font-weight:600; color:#333333;">Team Lead · Software Engineer</span>';
+      }
+
+      const heroSubtitle = clone.querySelector('.hero-subtitle');
+      if (heroSubtitle) {
+        heroSubtitle.style.background = 'transparent';
+        heroSubtitle.style.border = 'none';
+        heroSubtitle.style.color = '#333333';
+      }
+
+      const sectionTitles = clone.querySelectorAll('.section-title');
+      sectionTitles.forEach(title => {
+        title.style.background = 'transparent';
+        title.style.color = '#111111';
+        title.style.borderLeft = '3px solid #333333';
+        title.style.paddingLeft = '8px';
+      });
+
+      clone.querySelectorAll('.skill-badge, .interest-badge, .duration, .edu-year').forEach(item => {
+        item.style.background = '#ffffff';
+        item.style.color = '#111111';
+        item.style.border = '1px solid #cccccc';
+      });
+
+      clone.querySelectorAll('a').forEach(link => {
+        link.style.color = '#111111';
+        link.style.textDecoration = 'none';
+      });
+
+      const printRoleTag = clone.querySelector('.print-role-tag');
+      if (printRoleTag) {
+        printRoleTag.style.display = 'none';
+      }
+
+      cloneContainer.appendChild(clone);
+      document.body.appendChild(cloneContainer);
 
       const opt = {
         margin: [8, 8, 8, 8],
         filename: 'Suraj_Deshmukh_Resume_ATS.pdf',
-        image: { type: 'jpeg', quality: 0.97 },
-        html2canvas: { scale: 2, useCORS: true, logging: false, dpi: 300 },
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, logging: false, dpi: 300, backgroundColor: '#ffffff' },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
         pagebreak: { mode: ['css', 'legacy'] }
       };
 
-      window.html2pdf().set(opt).from(resumeElement).save().then(() => {
-        resumeElement.style.maxWidth = originalMaxWidth;
-        resumeElement.style.overflow = originalOverflow;
-        resumeElement.style.background = originalBackground;
+      window.html2pdf().set(opt).from(clone).save().then(() => {
+        document.body.removeChild(cloneContainer);
       }).catch(error => {
-        resumeElement.style.maxWidth = originalMaxWidth;
-        resumeElement.style.overflow = originalOverflow;
-        resumeElement.style.background = originalBackground;
+        document.body.removeChild(cloneContainer);
         console.error('ATS PDF download failed:', error);
       });
     });
