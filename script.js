@@ -236,6 +236,7 @@
     // Initialize PDF download
     initPDFDownload();
     initPDFDownload1();
+    initPDFDownload2();
 
     initInterestModal();
 
@@ -275,6 +276,51 @@
           document.body.removeChild(link);
         });
       }
+    });
+  }
+
+  function initPDFDownload2() {
+    const atsDownloadBtn = document.getElementById('downloadResumeByTechStack');
+    const resumeElement = document.getElementById('resume');
+
+    if (!atsDownloadBtn || !resumeElement) return;
+
+    atsDownloadBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (!window.html2pdf) {
+        console.warn('html2pdf is not available. ATS PDF download cannot proceed.');
+        return;
+      }
+
+      const originalMaxWidth = resumeElement.style.maxWidth;
+      const originalOverflow = resumeElement.style.overflow;
+      const originalBackground = resumeElement.style.background;
+
+      resumeElement.style.maxWidth = '210mm';
+      resumeElement.style.overflow = 'visible';
+      resumeElement.style.background = '#ffffff';
+
+      const opt = {
+        margin: [8, 8, 8, 8],
+        filename: 'Suraj_Deshmukh_Resume_ATS.pdf',
+        image: { type: 'jpeg', quality: 0.97 },
+        html2canvas: { scale: 2, useCORS: true, logging: false, dpi: 300 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: ['css', 'legacy'] }
+      };
+
+      window.html2pdf().set(opt).from(resumeElement).save().then(() => {
+        resumeElement.style.maxWidth = originalMaxWidth;
+        resumeElement.style.overflow = originalOverflow;
+        resumeElement.style.background = originalBackground;
+      }).catch(error => {
+        resumeElement.style.maxWidth = originalMaxWidth;
+        resumeElement.style.overflow = originalOverflow;
+        resumeElement.style.background = originalBackground;
+        console.error('ATS PDF download failed:', error);
+      });
     });
   }
 
