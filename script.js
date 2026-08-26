@@ -410,9 +410,9 @@
         body: `
         <ul>
           <li>Online learning & test prep platform for grades 5-12</li>
-          <li>LMS with live classes, recorded sessions & interactive learning</li>
-          <li>Batch, course, section, lecture & live session management</li>
-          <li>Assessments, self-practice & motivation-based learning modules</li>
+          // <li>LMS with live classes, recorded sessions & interactive learning</li>
+          <li>Batch, course, section & lecture management</li>
+          <li>Assessments & self-practice learning modules</li>
         </ul>
       `
       },
@@ -422,7 +422,7 @@
         <p><strong>Centralized Content Management System</strong> integrated with TG Campus</p>
         <ul>
           <li>Manage & map questionnaire and assessment content</li>
-          <li>Content assigned to batches, courses, sections, lectures & live sessions</li>
+          <li>Content assigned to batches, courses, sections & lectures</li>
           <li>Structured content delivery & assessment integration</li>
         </ul>
       `
