@@ -397,10 +397,6 @@
         body: `
         <ul>
           <li>Digital client on-boarding platform</li>
-          <li>Real-time transaction tracking</li>
-          <li>Customer insights & analytics</li>
-          <li>Auto-filled investor applications</li>
-          <li>Top-up & redemption transactions</li>
         </ul>
       `
       },
@@ -410,7 +406,6 @@
         body: `
         <ul>
           <li>Online learning & test prep platform for grades 5-12</li>
-          // <li>LMS with live classes, recorded sessions & interactive learning</li>
           <li>Batch, course, section & lecture management</li>
           <li>Assessments & self-practice learning modules</li>
         </ul>
