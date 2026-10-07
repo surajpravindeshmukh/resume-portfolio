@@ -302,7 +302,7 @@
         title: 'Angular & .NET Solutions',
         body: `
         <ul>
-          <li>Built with Angular 21 & .NET Web API</li>
+          <li>Developed full-stack web applications using Angular 21 and .NET Web APIs.</li>
           <li>Delivered full-stack enterprise applications</li>
           <li>Integrated REST APIs & databases</li>
         </ul>
@@ -323,8 +323,8 @@
         body: `
         <ul>
           <li>Upgraded Angular 8 → 21 across projects</li>
-          <li>Migrated from older frameworks to modern Angular</li>
-          <li>Improved performance using lazy loading</li>
+          <li>Modernized existing Angular applications by adopting modern Angular features and best practices.</li>
+          <li>Optimized Angular application performance by implementing lazy loading, optimizing API calls and data handling, minimizing unnecessary component rendering, and improving overall application load times.</li>
         </ul>
       `
       },
