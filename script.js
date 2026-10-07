@@ -322,7 +322,7 @@
         title: 'Technical Design Work',
         body: `
         <ul>
-          <li>Upgraded Angular 10 → 21 across projects</li>
+          <li>Upgraded Angular 8 → 21 across projects</li>
           <li>Migrated from older frameworks to modern Angular</li>
           <li>Improved performance using lazy loading</li>
         </ul>
